@@ -100,6 +100,11 @@ Singleton {
     }
 
     function getAppIcon(name: string, fallback: string): string {
+        if(Config.bar.workspaces.windowIconType === "app")
+            for (const iconConfig of Config.bar.workspaces.windowIcons)
+                if (matchIconConfig(name, iconConfig))
+                    return iconConfig.icon;
+
         const icon = DesktopEntries.heuristicLookup(name)?.icon;
         if (fallback !== "undefined")
             return Quickshell.iconPath(icon, fallback);
@@ -107,9 +112,10 @@ Singleton {
     }
 
     function getAppCategoryIcon(name: string, fallback: string): string {
-        for (const iconConfig of Config.bar.workspaces.windowIcons)
-            if (matchIconConfig(name, iconConfig))
-                return iconConfig.icon;
+        if(Config.bar.workspaces.windowIconType === "category")
+            for (const iconConfig of Config.bar.workspaces.windowIcons)
+                if (matchIconConfig(name, iconConfig))
+                    return iconConfig.icon;
 
         const categories = DesktopEntries.heuristicLookup(name)?.categories;
 

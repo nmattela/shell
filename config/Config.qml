@@ -177,7 +177,10 @@ Singleton {
                 activeLabel: bar.workspaces.activeLabel,
                 capitalisation: bar.workspaces.capitalisation,
                 specialWorkspaceIcons: bar.workspaces.specialWorkspaceIcons,
-                windowIcons: bar.workspaces.windowIcons
+                windowIcons: bar.workspaces.windowIcons,
+                windowIconType: bar.workspaces.windowIconType,
+                showActiveLabel: bar.workspaces.showActiveLabel,
+                showOccupiedLabel: bar.workspaces.showOccupiedLabel
             },
             activeWindow: {
                 compact: bar.activeWindow.compact,

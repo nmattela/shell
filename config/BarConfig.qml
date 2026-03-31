@@ -85,6 +85,9 @@ JsonObject {
                 icon: "sports_esports"
             }
         ]
+        property string windowIconType: "category" // can be either "category" or "app"
+        property bool showActiveLabel: true
+        property bool showOccupiedLabel: true
     }
 
     component ActiveWindow: JsonObject {

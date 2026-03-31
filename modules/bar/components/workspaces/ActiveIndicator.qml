@@ -52,6 +52,9 @@ StyledRect {
         sourceColor: Colours.palette.m3onSurface
         colorizationColor: Colours.palette.m3onPrimary
 
+        colorization: 0
+        brightness: 0
+
         x: 0
         y: -parent.offset
         implicitWidth: root.mask.implicitWidth

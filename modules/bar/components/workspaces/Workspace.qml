@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Widgets
 import qs.components
 import qs.services
 import qs.config
@@ -22,6 +23,7 @@ ColumnLayout {
 
     readonly property int ws: groupOffset + index + 1
     readonly property bool isOccupied: occupied[ws] ?? false
+    readonly property bool isActive: root.activeWsId === root.ws
     readonly property bool hasWindows: isOccupied && Config.bar.workspaces.showWindows
 
     Layout.alignment: Qt.AlignHCenter
@@ -33,7 +35,7 @@ ColumnLayout {
         id: indicator
 
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-        Layout.preferredHeight: Config.bar.sizes.innerWidth - Appearance.padding.small * 2
+        Layout.preferredHeight: (root.isActive && !Config.bar.workspaces.showActiveLabel) || (root.isOccupied && !Config.bar.workspaces.showOccupiedLabel) ? indicator.preferredHeight : Config.bar.sizes.innerWidth - Appearance.padding.small * 2
 
         animate: true
         text: {
@@ -46,11 +48,11 @@ ColumnLayout {
                 displayName = displayName.toLowerCase();
             }
             const label = Config.bar.workspaces.label || displayName;
-            const occupiedLabel = Config.bar.workspaces.occupiedLabel || label;
-            const activeLabel = Config.bar.workspaces.activeLabel || (root.isOccupied ? occupiedLabel : label);
-            return root.activeWsId === root.ws ? activeLabel : root.isOccupied ? occupiedLabel : label;
+            const occupiedLabel = Config.bar.workspaces.showOccupiedLabel ? Config.bar.workspaces.occupiedLabel || label : "";
+            const activeLabel = Config.bar.workspaces.showActiveLabel ? Config.bar.workspaces.activeLabel || (root.isOccupied ? occupiedLabel : label) : "";
+            return root.isActive ? activeLabel : root.isOccupied ? occupiedLabel : label;
         }
-        color: Config.bar.workspaces.occupiedBg || root.isOccupied || root.activeWsId === root.ws ? Colours.palette.m3onSurface : Colours.layer(Colours.palette.m3outlineVariant, 2)
+        color: Config.bar.workspaces.occupiedBg || root.isOccupied || root.isActive ? Colours.palette.m3onSurface : Colours.layer(Colours.palette.m3outlineVariant, 2)
         verticalAlignment: Qt.AlignVCenter
     }
 
@@ -101,10 +103,21 @@ ColumnLayout {
 
                 MaterialIcon {
                     required property var modelData
+                    visible: Config.bar.workspaces.windowIconType === "category"
 
                     grade: 0
                     text: Icons.getAppCategoryIcon(modelData.lastIpcObject.class, "terminal")
                     color: Colours.palette.m3onSurfaceVariant
+                }
+
+                IconImage {
+                    required property var modelData
+                    visible: Config.bar.workspaces.windowIconType === "app"
+
+                    asynchronous: true
+                    source: Icons.getAppIcon(modelData.lastIpcObject.class, "image-missing")
+
+                    implicitSize: Appearance.font.size.larger
                 }
             }
         }
