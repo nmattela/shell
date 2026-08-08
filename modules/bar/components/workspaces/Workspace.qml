@@ -4,9 +4,9 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
+import Caelestia.Config
 import qs.components
 import qs.services
-import qs.config
 import qs.utils
 
 ColumnLayout {
@@ -19,7 +19,7 @@ ColumnLayout {
 
     readonly property bool isWorkspace: true // Flag for finding workspace children
     // Unanimated prop for others to use as reference
-    readonly property int size: implicitHeight + (hasWindows ? Appearance.padding.small : 0)
+    readonly property int size: implicitHeight + (hasWindows ? Tokens.padding.extraSmall : 0)
 
     readonly property int ws: groupOffset + index + 1
     readonly property bool isOccupied: occupied[ws] ?? false
@@ -54,6 +54,7 @@ ColumnLayout {
         }
         color: Config.bar.workspaces.occupiedBg || root.isOccupied || root.isActive ? Colours.palette.m3onSurface : Colours.layer(Colours.palette.m3outlineVariant, 2)
         verticalAlignment: Qt.AlignVCenter
+        font.family: Tokens.font.workspaces
     }
 
     Loader {
@@ -63,7 +64,7 @@ ColumnLayout {
 
         Layout.alignment: Qt.AlignHCenter
         Layout.fillHeight: true
-        Layout.topMargin: -Config.bar.sizes.innerWidth / 10
+        Layout.topMargin: -Tokens.sizes.bar.innerWidth / 10
 
         visible: active
         active: root.hasWindows
@@ -76,7 +77,7 @@ ColumnLayout {
                     properties: "scale"
                     from: 0
                     to: 1
-                    easing.bezierCurve: Appearance.anim.curves.standardDecel
+                    easing: Tokens.anim.standardDecel
                 }
             }
 
@@ -84,7 +85,7 @@ ColumnLayout {
                 Anim {
                     properties: "scale"
                     to: 1
-                    easing.bezierCurve: Appearance.anim.curves.standardDecel
+                    easing: Tokens.anim.standardDecel
                 }
                 Anim {
                     properties: "x,y"
@@ -96,7 +97,7 @@ ColumnLayout {
                     values: {
                         const ws = root.ws;
                         const windows = Hypr.toplevels.values.filter(c => c.workspace?.id === ws);
-                        const maxIcons = Config.bar.workspaces.maxWindowIcons;
+                        const maxIcons = root.Config.bar.workspaces.maxWindowIcons;
                         return maxIcons > 0 ? windows.slice(0, maxIcons) : windows;
                     }
                 }
