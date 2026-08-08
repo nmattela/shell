@@ -50,13 +50,6 @@ ColumnLayout {
             font.pointSize: Math.floor(root.centerWidth / 4)
             visible: pfp.status !== Image.Ready
         }
-
-        CachingImage {
-            id: pfp
-
-            anchors.fill: parent
-            path: Quickshell.shellPath("assets/goon.jpg")
-        }
     }
 
     PasswordInput {
