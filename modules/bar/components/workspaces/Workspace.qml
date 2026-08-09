@@ -105,14 +105,14 @@ ColumnLayout {
                     }
                 }
 
-                // MaterialIcon {
-                //     required property var modelData
-                //     visible: Config.bar.workspaces.windowIconType === "category"
+                MaterialIcon {
+                    required property var modelData
+                    visible: Config.bar.workspaces.windowIconType === "category"
 
-                //     grade: 0
-                //     text: Icons.getAppCategoryIcon(modelData.lastIpcObject.class, "terminal")
-                //     color: Colours.palette.m3onSurfaceVariant
-                // }
+                    grade: 0
+                    text: Icons.getAppCategoryIcon(modelData.lastIpcObject.class, "terminal")
+                    color: Colours.palette.m3onSurfaceVariant
+                }
 
                 // IconImage {
                 //     required property var modelData
