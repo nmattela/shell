@@ -35,7 +35,8 @@ ColumnLayout {
         id: indicator
 
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-        Layout.preferredHeight: (root.isActive && !Config.bar.workspaces.showActiveLabel) || (root.isOccupied && !Config.bar.workspaces.showOccupiedLabel) ? indicator.preferredHeight : Config.bar.sizes.innerWidth - Appearance.padding.small * 2
+        Layout.preferredHeight: Tokens.sizes.bar.innerWidth - Tokens.padding.small
+        // Layout.preferredHeight: (root.isActive && !Config.bar.workspaces.showActiveLabel) || (root.isOccupied && !Config.bar.workspaces.showOccupiedLabel) ? indicator.preferredHeight : Config.bar.sizes.innerWidth - Appearance.padding.small * 2
 
         animate: true
         text: {
