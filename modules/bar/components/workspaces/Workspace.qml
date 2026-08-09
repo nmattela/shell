@@ -35,8 +35,8 @@ ColumnLayout {
         id: indicator
 
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-        Layout.preferredHeight: Tokens.sizes.bar.innerWidth - Tokens.padding.small
-        // Layout.preferredHeight: (root.isActive && !Config.bar.workspaces.showActiveLabel) || (root.isOccupied && !Config.bar.workspaces.showOccupiedLabel) ? indicator.preferredHeight : Config.bar.sizes.innerWidth - Appearance.padding.small * 2
+        // Layout.preferredHeight: Tokens.sizes.bar.innerWidth - Tokens.padding.small
+        Layout.preferredHeight: (root.isActive && !Config.bar.workspaces.showActiveLabel) || (root.isOccupied && !Config.bar.workspaces.showOccupiedLabel) ? indicator.preferredHeight : Config.bar.sizes.innerWidth - Appearance.padding.small * 2
 
         animate: true
         text: {
@@ -49,10 +49,10 @@ ColumnLayout {
                 displayName = displayName.toLowerCase();
             }
             const label = Config.bar.workspaces.label || displayName;
-            // const occupiedLabel = Config.bar.workspaces.showOccupiedLabel ? Config.bar.workspaces.occupiedLabel || label : "";
-            const occupiedLabel = Config.bar.workspaces.occupiedLabel || label;
-            // const activeLabel = Config.bar.workspaces.showActiveLabel ? Config.bar.workspaces.activeLabel || (root.isOccupied ? occupiedLabel : label) : "";
-            const activeLabel = Config.bar.workspaces.activeLabel || (root.isOccupied ? occupiedLabel : label);
+            const occupiedLabel = Config.bar.workspaces.showOccupiedLabel ? Config.bar.workspaces.occupiedLabel || label : "";
+            // const occupiedLabel = Config.bar.workspaces.occupiedLabel || label;
+            const activeLabel = Config.bar.workspaces.showActiveLabel ? Config.bar.workspaces.activeLabel || (root.isOccupied ? occupiedLabel : label) : "";
+            // const activeLabel = Config.bar.workspaces.activeLabel || (root.isOccupied ? occupiedLabel : label);
             return root.isActive ? activeLabel : root.isOccupied ? occupiedLabel : label;
         }
         color: Config.bar.workspaces.occupiedBg || root.isOccupied || root.isActive ? Colours.palette.m3onSurface : Colours.layer(Colours.palette.m3outlineVariant, 2)

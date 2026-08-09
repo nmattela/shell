@@ -53,6 +53,9 @@ class BarWorkspaces : public ConfigObject {
     CONFIG_PROPERTY(QString, occupiedLabel, u"󰮯"_s)
     CONFIG_PROPERTY(QString, activeLabel, u"󰮯"_s)
     CONFIG_PROPERTY(QString, capitalisation, u"preserve"_s)
+    CONFIG_PROPERTY(QString, windowIconType, u"category"_s)
+    CONFIG_PROPERTY(bool, showActiveLabel, true)
+    CONFIG_PROPERTY(bool, showOccupiedLabel, true)
     CONFIG_GLOBAL_PROPERTY(QVariantList, specialWorkspaceIcons)
     CONFIG_GLOBAL_PROPERTY(QVariantList, windowIcons,
         { vmap({
