@@ -114,15 +114,15 @@ ColumnLayout {
                     color: Colours.palette.m3onSurfaceVariant
                 }
 
-                // IconImage {
-                //     required property var modelData
-                //     visible: Config.bar.workspaces.windowIconType === "app"
+                IconImage {
+                    required property var modelData
+                    visible: Config.bar.workspaces.windowIconType === "app"
 
-                //     asynchronous: true
-                //     source: Icons.getAppIcon(modelData.lastIpcObject.class, "image-missing")
+                    asynchronous: true
+                    source: Icons.getAppIcon(modelData.lastIpcObject.class, "image-missing")
 
-                //     implicitSize: Tokens.font.body.large
-                // }
+                    // implicitSize: Tokens.font.body.large
+                }
             }
         }
     }
