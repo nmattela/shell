@@ -5,6 +5,7 @@ import Quickshell
 import Caelestia.Config
 import qs.components
 import qs.services
+import qs.components.images
 
 ColumnLayout {
     id: root
@@ -40,7 +41,7 @@ ColumnLayout {
         implicitHeight: root.centerWidth / 2
 
         color: Colours.tPalette.m3surfaceContainer
-        radius: Appearance.rounding.full
+        // radius: Appearance.rounding.full
 
         MaterialIcon {
             anchors.centerIn: parent
@@ -50,6 +51,13 @@ ColumnLayout {
             font.pointSize: Math.floor(root.centerWidth / 4)
             visible: pfp.status !== Image.Ready
         }
+    }
+
+    CachingImage {
+        id: pfp
+
+        anchors.fill: parent
+        path: Quickshell.shellPath("assets/goon.jpg")
     }
 
     PasswordInput {
