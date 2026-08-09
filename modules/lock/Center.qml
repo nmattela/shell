@@ -40,7 +40,7 @@ ColumnLayout {
         implicitWidth: root.centerWidth / 2
         implicitHeight: root.centerWidth / 2
 
-        color: Colours.tPalette.m3surfaceContainer
+        // color: Colours.tPalette.m3surfaceContainer
         // radius: Appearance.rounding.full
 
         MaterialIcon {
