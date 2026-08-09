@@ -36,7 +36,7 @@ ColumnLayout {
 
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
         // Layout.preferredHeight: Tokens.sizes.bar.innerWidth - Tokens.padding.small
-        Layout.preferredHeight: (root.isActive && !Config.bar.workspaces.showActiveLabel) || (root.isOccupied && !Config.bar.workspaces.showOccupiedLabel) ? indicator.preferredHeight : Config.bar.sizes.innerWidth - Appearance.padding.small * 2
+        Layout.preferredHeight: (root.isActive && !Config.bar.workspaces.showActiveLabel) || (root.isOccupied && !Config.bar.workspaces.showOccupiedLabel) ? indicator.preferredHeight : Tokens.sizes.bar.innerWidth - Appearance.padding.small * 2
 
         animate: true
         text: {
@@ -121,7 +121,7 @@ ColumnLayout {
                     asynchronous: true
                     source: Icons.getAppIcon(modelData.lastIpcObject.class, "image-missing")
 
-                    implicitSize: Appearance.font.size.larger
+                    implicitSize: Tokens.font.body.extraLarge
                 }
             }
         }

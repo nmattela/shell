@@ -120,7 +120,7 @@ Item {
 
         anchors.horizontalCenter: (Config.bar.workspaces.windowIconType === "category" ? categoryIcon.horizontalCenter : appIcon.horizontalCenter)
         anchors.top: (Config.bar.workspaces.windowIconType === "category" ? categoryIcon.bottom : appIcon.bottom)
-        anchors.topMargin: Appearance.spacing.small
+        anchors.topMargin: Tokens.spacing.small
 
         font: metrics.font
         color: root.colour
