@@ -121,7 +121,7 @@ ColumnLayout {
                     asynchronous: true
                     source: Icons.getAppIcon(modelData.lastIpcObject.class, "image-missing")
 
-                    // implicitSize: Tokens.font.body.large
+                    implicitSize: Tokens.font.body.medium.pointSize
                 }
             }
         }

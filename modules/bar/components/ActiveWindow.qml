@@ -86,7 +86,6 @@ Item {
         source: Icons.getAppIcon(Hypr.activeToplevel?.lastIpcObject.class ?? "", "image-missing")
     }
 
-
     Title {
         id: text1
     }

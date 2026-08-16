@@ -100,19 +100,25 @@ Singleton {
     }
 
     function getAppIcon(name: string, fallback: string): string {
-        if(Config.bar.workspaces.windowIconType === "app")
+        console.log(`getAppIcon: `, name, fallback);
+        console.log(`Config.bar.workspaces.windowIcons: `, Config.bar.workspaces.windowIcons);
+        if (Config.bar.workspaces.windowIconType === "app")
             for (const iconConfig of Config.bar.workspaces.windowIcons)
                 if (matchIconConfig(name, iconConfig))
                     return iconConfig.icon;
 
         const icon = DesktopEntries.heuristicLookup(name)?.icon;
-        if (fallback !== "undefined")
-            return Quickshell.iconPath(icon, fallback);
+        console.log(`heuristic lookup: `, icon);
+        if (fallback !== "undefined") {
+            const iconPathh = Quickshell.iconPath(icon, fallback);
+            console.log(`iconPath: `, iconPathh);
+            return iconPathh;
+        }
         return Quickshell.iconPath(icon);
     }
 
     function getAppCategoryIcon(name: string, fallback: string): string {
-        if(Config.bar.workspaces.windowIconType === "category")
+        if (Config.bar.workspaces.windowIconType === "category")
             for (const iconConfig of Config.bar.workspaces.windowIcons)
                 if (matchIconConfig(name, iconConfig))
                     return iconConfig.icon;
