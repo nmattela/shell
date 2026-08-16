@@ -4,9 +4,9 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
+import Caelestia.Config
 import qs.components
 import qs.services
-import qs.config
 import qs.utils
 
 ColumnLayout {
@@ -19,7 +19,7 @@ ColumnLayout {
 
     readonly property bool isWorkspace: true // Flag for finding workspace children
     // Unanimated prop for others to use as reference
-    readonly property int size: implicitHeight + (hasWindows ? Appearance.padding.small : 0)
+    readonly property int size: implicitHeight + (hasWindows ? Tokens.padding.extraSmall : 0)
 
     readonly property int ws: groupOffset + index + 1
     readonly property bool isOccupied: occupied[ws] ?? false
@@ -35,7 +35,8 @@ ColumnLayout {
         id: indicator
 
         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-        Layout.preferredHeight: (root.isActive && !Config.bar.workspaces.showActiveLabel) || (root.isOccupied && !Config.bar.workspaces.showOccupiedLabel) ? indicator.preferredHeight : Config.bar.sizes.innerWidth - Appearance.padding.small * 2
+        // Layout.preferredHeight: Tokens.sizes.bar.innerWidth - Tokens.padding.small
+        Layout.preferredHeight: (root.isActive && !Config.bar.workspaces.showActiveLabel) || (root.isOccupied && !Config.bar.workspaces.showOccupiedLabel) ? indicator.preferredHeight : Tokens.sizes.bar.innerWidth - Tokens.padding.small * 2
 
         animate: true
         text: {
@@ -49,11 +50,14 @@ ColumnLayout {
             }
             const label = Config.bar.workspaces.label || displayName;
             const occupiedLabel = Config.bar.workspaces.showOccupiedLabel ? Config.bar.workspaces.occupiedLabel || label : "";
+            // const occupiedLabel = Config.bar.workspaces.occupiedLabel || label;
             const activeLabel = Config.bar.workspaces.showActiveLabel ? Config.bar.workspaces.activeLabel || (root.isOccupied ? occupiedLabel : label) : "";
+            // const activeLabel = Config.bar.workspaces.activeLabel || (root.isOccupied ? occupiedLabel : label);
             return root.isActive ? activeLabel : root.isOccupied ? occupiedLabel : label;
         }
         color: Config.bar.workspaces.occupiedBg || root.isOccupied || root.isActive ? Colours.palette.m3onSurface : Colours.layer(Colours.palette.m3outlineVariant, 2)
         verticalAlignment: Qt.AlignVCenter
+        font.family: Tokens.font.workspaces
     }
 
     Loader {
@@ -63,7 +67,7 @@ ColumnLayout {
 
         Layout.alignment: Qt.AlignHCenter
         Layout.fillHeight: true
-        Layout.topMargin: -Config.bar.sizes.innerWidth / 10
+        Layout.topMargin: -Tokens.sizes.bar.innerWidth / 10
 
         visible: active
         active: root.hasWindows
@@ -76,7 +80,7 @@ ColumnLayout {
                     properties: "scale"
                     from: 0
                     to: 1
-                    easing.bezierCurve: Appearance.anim.curves.standardDecel
+                    easing: Tokens.anim.standardDecel
                 }
             }
 
@@ -84,7 +88,7 @@ ColumnLayout {
                 Anim {
                     properties: "scale"
                     to: 1
-                    easing.bezierCurve: Appearance.anim.curves.standardDecel
+                    easing: Tokens.anim.standardDecel
                 }
                 Anim {
                     properties: "x,y"
@@ -96,7 +100,7 @@ ColumnLayout {
                     values: {
                         const ws = root.ws;
                         const windows = Hypr.toplevels.values.filter(c => c.workspace?.id === ws);
-                        const maxIcons = Config.bar.workspaces.maxWindowIcons;
+                        const maxIcons = root.Config.bar.workspaces.maxWindowIcons;
                         return maxIcons > 0 ? windows.slice(0, maxIcons) : windows;
                     }
                 }
@@ -117,7 +121,7 @@ ColumnLayout {
                     asynchronous: true
                     source: Icons.getAppIcon(modelData.lastIpcObject.class, "image-missing")
 
-                    implicitSize: Appearance.font.size.larger
+                    implicitSize: Tokens.font.body.medium.pointSize
                 }
             }
         }
