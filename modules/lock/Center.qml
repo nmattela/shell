@@ -1,11 +1,9 @@
 import "center"
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Caelestia.Config
 import qs.components
 import qs.services
-import qs.components.images
 
 ColumnLayout {
     id: root
@@ -36,28 +34,9 @@ ColumnLayout {
 
     ProfilePic {
         Layout.alignment: Qt.AlignHCenter
-
-        implicitWidth: root.centerWidth / 2
-        implicitHeight: root.centerWidth / 2
-
-        // color: Colours.tPalette.m3surfaceContainer
-        // radius: Appearance.rounding.full
-
-        MaterialIcon {
-            anchors.centerIn: parent
-
-            text: "person"
-            color: Colours.palette.m3onSurfaceVariant
-            font.pointSize: Math.floor(root.centerWidth / 4)
-            visible: pfp.status !== Image.Ready
-        }
-    }
-
-    CachingImage {
-        id: pfp
-
-        anchors.fill: parent
-        path: Quickshell.shellPath("assets/goon.jpg")
+        Layout.topMargin: Tokens.spacing.extraExtraLarge * root.centerScale
+        Layout.bottomMargin: Tokens.spacing.extraLarge * root.centerScale
+        centerWidth: root.centerWidth
     }
 
     PasswordInput {
